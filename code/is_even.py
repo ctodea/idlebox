@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 import sys
 
-#simple indirect recursion example
-
 def is_even(x):
     if x == 0:
         return True
