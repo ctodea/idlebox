@@ -8,35 +8,39 @@ fi
 force_color_prompt=yes
 
 if [ "$force_color_prompt" = yes ]; then
-	export PS1="\[\033[38;5;39m\]\u\[$(tput sgr0)\]\[\033[38;5;99m\]@\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;34m\]\h\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;99m\]:\[$(tput sgr0)\]\[\033[38;5;143m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]$\[$(tput sgr0)\] "
+    export PS1="\[\033[38;5;39m\]\u\[$(tput sgr0)\]\[\033[38;5;99m\]@\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;34m\]\h\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;99m\]:\[$(tput sgr0)\]\[\033[38;5;143m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]$\[$(tput sgr0)\] "
 else
-	export PS1="[\u@\h:\w]\$ "
+    export PS1="[\u@\h:\w]\$ "
 fi
 
 function cd () {
 case $1 in 
-	..2)
-		cd ../..
-		;;
-	..3)
-		cd ../../..
-		;;
-	..4)
-		cd ../../../..
-		;;
-	..5)
-		cd ../../../../../
-		;;
-	*)
-		builtin cd $@
-		;;
+    ..2)
+        cd ../..
+        ;;
+    ..3)
+        cd ../../..
+        ;;
+    ..4)
+        cd ../../../..
+        ;;
+    ..5)
+        cd ../../../../../
+        ;;
+    *)
+        builtin cd $@
+        ;;
 esac
 }
+
+function afregar() {
+  [[ "$(docker ps -aq | wc -l)" -eq "0" ]] && echo 'Nothing to do' || docker rm -f $(docker ps -aq)
+}
+
 
 alias ls="ls -h --color=auto"
 alias ll="ls -lha --color=auto"
 ### DOCKER ALIASES
-alias afregar='docker rm -f $(docker ps -aq)'
 alias sshh="ssh -o StrictHostKeyChecking=no"
 alias dex="docker exec -it"
 alias dip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
