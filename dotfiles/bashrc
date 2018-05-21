@@ -37,6 +37,9 @@ function afregar() {
   [[ "$(docker ps -aq | wc -l)" -eq "0" ]] && echo 'Nothing to do' || docker rm -f $(docker ps -aq)
 }
 
+function grepe() {
+  grep --color -E "$1|$" $2
+}
 
 alias ls="ls -h --color=auto"
 alias ll="ls -lha --color=auto"
