@@ -13,7 +13,7 @@ else
     export PS1="[\u@\h:\w]\$ "
 fi
 
-function cd () {
+cd () {
 case $1 in 
     ..2)
         cd ../..
@@ -33,12 +33,12 @@ case $1 in
 esac
 }
 
-function afregar() {
+afregar() {
   [[ "$(docker ps -aq | wc -l)" -eq "0" ]] && echo 'Nothing to do' || docker rm -f $(docker ps -aq)
 }
 
-function grepe() {
-  grep --color -E "$1|$" $2
+grepe() {
+  grep --color -E "$1|$" $2  
 }
 
 alias ls="ls -h --color=auto"
@@ -48,4 +48,10 @@ alias sshh="ssh -o StrictHostKeyChecking=no"
 alias dex="docker exec -it"
 alias dip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 alias :q!="exit"
-#source <(kubectl completion bash)
+alias numbercol="head -n1 | tr -s ' ' '\n' | cat -n"
+#source <(kubectl completion bash 2>/dev/null)
+
+fucking_mouse() {
+  sudo modprobe -r psmouse
+  sudo modprobe psmouse
+}
