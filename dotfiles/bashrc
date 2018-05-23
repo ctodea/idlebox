@@ -48,7 +48,7 @@ alias sshh="ssh -o StrictHostKeyChecking=no"
 alias dex="docker exec -it"
 alias dip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 alias :q!="exit"
-alias numbercol="head -n1 | tr -s ' ' '\n' | cat -n"
+alias numbercol="head -n1 | tr -s ' ' '\n' | cat -n" # use with pipes e.g.: ps au | numbercol
 #source <(kubectl completion bash 2>/dev/null)
 
 fucking_mouse() {
