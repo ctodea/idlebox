@@ -10,4 +10,5 @@ done
 for i in "${!hashTable[@]}"; do
   ratio=$(bc <<< "scale=2; ${hashTable[$i]}/${n_pods}")
   echo "${i} | ${ratio//./}%"
+  echo "TOTAL | ${n_pods}"
 done
