@@ -2,7 +2,6 @@
 #include <stdlib.h>
 int main(int argc, char const *argv[])
 {
-    
     for(size_t i = 1; i < argc; i++)
     {
         int n = atoi(argv[i]);
@@ -21,9 +20,6 @@ int main(int argc, char const *argv[])
             printf("Factorial of %d = %llu\n", n, factorial);
         }
     }
-     
-    
-    
     return 0;
 }
 
