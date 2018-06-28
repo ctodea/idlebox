@@ -1,24 +1,29 @@
 #include <stdio.h>
-int main()
+#include <stdlib.h>
+int main(int argc, char const *argv[])
 {
-    int n;
-    printf("Input number: ");
-    scanf("%d",&n);
     
-    if (n < 0) 
+    for(size_t i = 1; i < argc; i++)
     {
-        printf("Input can't be negative\n"); 
-        return 1;
-    }
-    else
-    {
-        unsigned long long factorial = 1;
-        for(int i = 1; i <= n; i++)
+        int n = atoi(argv[i]);
+        if (n < 0) 
         {
-            factorial *= i;
+            printf("Input can't be negative\n"); 
+            return 1;
         }
-        printf("Factorial of %d = %llu\n", n, factorial);
+        else
+        {
+            unsigned long long factorial = 1;
+            for(int j = 1; j <= n; j++)
+            {
+                factorial *= j;
+            }
+            printf("Factorial of %d = %llu\n", n, factorial);
+        }
     }
+     
+    
     
     return 0;
 }
+
