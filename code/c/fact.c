@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
         else
         {
             unsigned long long factorial = 1;
-            for(int j = 1; j <= n; j++)
+            for(size_t j = 1; j <= n; j++)
             {
                 factorial *= j;
             }
