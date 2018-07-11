@@ -56,3 +56,18 @@ fucking_mouse() {
   sudo modprobe -r psmouse
   sudo modprobe psmouse
 }
+
+pods_nodes() {
+  [[ $(bc --version; echo $?) == 0 ]] || exit 1
+  local pods=$(kubectl get pods | sed '1d' | awk '{print $1}'
+  declare -A hm
+  local n_pods=$(sed '/^$/d' <<< "${pods}" | wc -l)
+  for i in "${pods}"; do
+    hm["${i}"]=$(( ${hm["${i}"]} + 1 ))
+  done
+  for i in "${!hm[@]}"; do
+    ratio=$(echo "scale=2; ${hm[$i]}/${n_pods}" | bc)
+    echo "${i} | ${ratio}"
+  done
+}
+
