@@ -17,3 +17,7 @@ sg_http_name = "http_80"
 s3_logs_bucket_name = "bucky-xuajau122"
 
 ecs_jenkins_cluster = "jenkins"
+
+ecs_jenkins_service = "jenkins"
+
+ecs_jenkins_service_count = "2"

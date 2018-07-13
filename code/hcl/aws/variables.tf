@@ -15,3 +15,7 @@ variable "sg_http_name" {}
 variable "s3_logs_bucket_name" {}
 
 variable "ecs_jenkins_cluster" {}
+
+variable "ecs_jenkins_service" {}
+
+variable "ecs_jenkins_service_count" {}
