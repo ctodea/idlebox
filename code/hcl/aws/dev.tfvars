@@ -14,4 +14,6 @@ sg_ssh_name = "ssh_22"
 
 sg_http_name = "http_80"
 
-s3_logs_bucket_name = "buckyMcBucketFace"
+s3_logs_bucket_name = "bucky-xuajau122"
+
+ecs_jenkins_cluster = "jenkins"
