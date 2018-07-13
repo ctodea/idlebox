@@ -3,6 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "foo" {
+  count           = 2
   ami             = "ami-b8b45ddf"
   instance_type   = "t2.micro"
   security_groups = ["${aws_security_group.allow_ssh_access.name}"]
