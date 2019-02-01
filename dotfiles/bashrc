@@ -13,25 +13,7 @@ else
     export PS1="[\u@\h:\w]\$ "
 fi
 
-cd () {
-case $1 in 
-    ..2)
-        cd ../..
-        ;;
-    ..3)
-        cd ../../..
-        ;;
-    ..4)
-        cd ../../../..
-        ;;
-    ..5)
-        cd ../../../../../
-        ;;
-    *)
-        builtin cd $@
-        ;;
-esac
-}
+cd(){ builtin cd "${@:1:1}"; }
 
 afregar() {
   [[ "$(docker ps -aq | wc -l)" -eq "0" ]] && echo 'Nothing to do' || docker rm -f $(docker ps -aq)
