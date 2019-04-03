@@ -56,3 +56,4 @@ pods_nodes() {
 #alias hexpass=echo -n $GIT_PASSWORD | hexdump -v -e '"x" 1/1 "%02X"' | tr x %
 bind Space:magic-space
 
+. /etc/bash_completion.d/ssh
