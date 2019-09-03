@@ -39,6 +39,18 @@ fucking_mouse() {
   sudo modprobe psmouse
 }
 
+gimme() {
+  ssh_directory="/root/.ssh/config.d/"
+  files=$(ls -1r "${ssh_directory}")
+  n_files=$(wc -l <<< "${files}")
+  for i in $(seq "$n_files");
+    do echo $i $(sed -n "${i}"p <<< "${files}");
+
+  done
+  read -p 'Pick one: ' user_sel
+  grep "^Host" "${ssh_directory}$(sed -n ${user_sel}p <<< ${files})" | awk '{print $NF}'
+}
+
 pods_nodes() {
   [[ $(bc --version; echo $?) == 0 ]] || exit 1
   local pods=$(kubectl get pods | sed '1d' | awk '{print $1}')
