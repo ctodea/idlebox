@@ -7,10 +7,7 @@ def is_even(x):
     else:
         return is_odd(x-1)
 
-
 def is_odd(x):
     return not is_even(x)
 
-
 print(is_even(int(sys.argv[1])))
-
