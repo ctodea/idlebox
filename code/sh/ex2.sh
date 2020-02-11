@@ -9,6 +9,6 @@ for i in "$@"; do
 done
 
 for i in "${x[@]}"; do
-  [ "$i" -gt 0 ] && echo "Talent" || echo "Werk"
+  [ "$i" -gt 0 ] && echo "Foo" || echo "Bar"
 done  
 
