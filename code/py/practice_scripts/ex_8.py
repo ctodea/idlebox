@@ -31,7 +31,7 @@ def anotherGame():
             if flag == 'Y' or flag == 'y':
                 return True
             else: return False
-        elif retries == 2: 
+        elif retries == 2:
             print("Bye")
             return False
 
@@ -41,7 +41,7 @@ def game():
         p1 = selection(1)
         p2 = selection(2)
         winner = rules(p1, p2)
-        if winner is 0: print("Draw")
+        if winner == 0: print("Draw")
         else: print("Player ", winner, " wins", sep='')
         if anotherGame() is False: break
 game()
