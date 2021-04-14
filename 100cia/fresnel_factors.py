@@ -24,8 +24,8 @@ def arrayToComplexArray(array_real, array_img): # we consider both arrays are sa
         result.append(complex(array_real[i],array_img[i]))
     return result
 
-
 caf2 = []
+
 gold_real = []
 gold_img = []
 ps = []
@@ -34,6 +34,7 @@ water_img = []
 wavenumber = []
 # IMPORTANT FACT: all arrays are considered to have the same length
 loadcsv(caf2, 'caf2.csv', 0)
+array_length = len(caf2) # all lengths are the same, we store them
 loadcsv(gold_real, 'gold.csv', 0)
 loadcsv(gold_img, 'gold.csv', 1)
 loadcsv(ps, 'ps.csv', 0)
@@ -54,8 +55,8 @@ frequency = [scipy.constants.c / (x * 10000000000)  for x in wavelength] # frequ
 
 def incidentAngleCalc(ni, nj, incident_angle): # incident angle in radians
     #tetha_0 = math.radians(40.636666666) # angle IR in radians
-    sin_tetha_0 = math.sin(incident_angle)
-    return math.sqrt(nj**2-ni**2*sin_tetha_0**2)/(nj)
+    sin_tetha_0 = cmath.sin(incident_angle)
+    return cmath.sqrt(nj**2-ni**2*sin_tetha_0**2)/(nj)
 
 def reflexionP5a(ni,nj,cos_i,cos_j):
     return (nj*cos_i-ni*cos_j)/(nj*cos_i+ni*cos_j)
@@ -74,17 +75,24 @@ def beta(wavelength, n2, cos_tetha_2): # formula 6
     return (2* scipy.constants.pi/wavelength)*n2*d*cos_tetha_2
 
 cos_tetha_air_caf2 = []
-for i in range(len(caf2)): # iterate any of the two arrays, they happen to have the same length
+for i in range(array_length): # iterate any of the two arrays, they happen to have the same length
     cos_tetha_air_caf2.append(incidentAngleCalc(1,caf2[i], 0.70912))
 
 cos_tetha_caf2_ps = []
-for i in range(len(caf2)): # iterate any of the two arrays, they happen to have the same length
+for i in range(array_length): # iterate any of the two arrays, they happen to have the same length
     cos_tetha_caf2_ps.append(incidentAngleCalc(caf2[i],ps[i],math.acos(cos_tetha_air_caf2[i])))
 
-print(cos_tetha_air_caf2)
+# cos_tetha_ps_water = []
+# for i in range(array_length): # iterate any of the two arrays, they happen to have the same length
+#     cos_tetha_ps_water.append(incidentAngleCalc(ps[i],water[i],math.acos(cos_tetha_caf2_ps[i])))
+
+# r_12_p_ir = []
+# for i in range(array_length): # iterate any of arrays, they happen to have the same length
+#     r_12_p_ir.append(reflexionP5a(caf2[i],ps[i],cos_tetha_air_caf2[i],cos_tetha_caf2_ps[i]))
+
 print(cos_tetha_caf2_ps)
 
-# reflexionP5a(caf2,ps,)
+
 # #lyyInter1 =
 
 # transmission_p = []
