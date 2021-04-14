@@ -3,7 +3,10 @@ import numpy as np
 import csv
 import os
 import cmath
-import scipy.constants as constants
+import scipy.constants
+import math
+
+
 
 ### loading data
 def loadcsv(array, csv_file, column_number):
@@ -29,7 +32,7 @@ ps = []
 water_real = []
 water_img = []
 wavenumber = []
-
+# IMPORTANT FACT: all arrays are considered to have the same length
 loadcsv(caf2, 'caf2.csv', 0)
 loadcsv(gold_real, 'gold.csv', 0)
 loadcsv(gold_img, 'gold.csv', 1)
@@ -42,8 +45,46 @@ water = arrayToComplexArray(water_real, water_img)
 
 ### end of loading data
 
-wavenumber_k = 10000000 # 10 mil
+wavenumber_k = 10000000 # 10 mil cm^-1
 
-wavelength_ir = [wavenumber_k / x  for x in wavenumber] # wavenumber -> wavelength
-frequency_ir = [constants.c / (x * 10000000000)  for x in wavelength_ir] # wavelength -> frequency
-frequency_sfg = [x for x in frequency_ir] # wavelength -> frequency
+wavelength = [wavenumber_k / x  for x in wavenumber] # lambda = 1/k
+frequency = [scipy.constants.c / (x * 10000000000)  for x in wavelength] # frequency = C / lambda
+# frequency_sfg = [x for x in frequency_ir] # wavelength -> frequency
+
+
+def incidentAngleCalc(ni, nj, incident_angle): # incident angle in radians
+    #tetha_0 = math.radians(40.636666666) # angle IR in radians
+    sin_tetha_0 = math.sin(incident_angle)
+    return math.sqrt(nj**2-ni**2*sin_tetha_0**2)/(nj)
+
+def reflexionP5a(ni,nj,cos_i,cos_j):
+    return (nj*cos_i-ni*cos_j)/(nj*cos_i+ni*cos_j)
+
+def reflexionS5b(ni,nj,cos_i,cos_j):
+    return (ni*cos_i-nj*cos_j)/(ni*cos_i+nj*cos_j)
+
+def transmissionP5c(ni,nj,cos_i,cos_j):
+    return (2*ni*cos_i)/(nj*cos_i+ni*cos_j)
+
+def transmissionS5d(ni,nj,cos_i,cos_j):
+    return (2*ni*cos_i)/(ni*cos_i+nj*cos_j)
+
+def beta(wavelength, n2, cos_tetha_2): # formula 6
+    d = 100 * 10**(-9) # constant
+    return (2* scipy.constants.pi/wavelength)*n2*d*cos_tetha_2
+
+cos_tetha_air_caf2 = []
+for i in range(len(caf2)): # iterate any of the two arrays, they happen to have the same length
+    cos_tetha_air_caf2.append(incidentAngleCalc(1,caf2[i], 0.70912))
+
+cos_tetha_caf2_ps = []
+for i in range(len(caf2)): # iterate any of the two arrays, they happen to have the same length
+    cos_tetha_caf2_ps.append(incidentAngleCalc(caf2[i],ps[i],math.acos(cos_tetha_air_caf2[i])))
+
+print(cos_tetha_air_caf2)
+print(cos_tetha_caf2_ps)
+
+# reflexionP5a(caf2,ps,)
+# #lyyInter1 =
+
+# transmission_p = []
