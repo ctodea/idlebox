@@ -6,5 +6,4 @@ set cursorline
 colorscheme evening
 syntax on
 set expandtab
-set ruler
 set cc=80
