@@ -1,0 +1,2 @@
+iptables -t nat -I PREROUTING -p tcp -d pubk_IP --dport 50443 -j DNAT --to-destination 192.168.20.164:443
+iptables -I FORWARD -m state -d 192.168.20.164/24 --state NEW,RELATED,ESTABLISHED -j ACCEPT 
