@@ -22,9 +22,6 @@ b = len(freqs) - 1
 combs = ([comb for comb in combinations_with_replacement(freqs, 3)])
 sums = np.array([sum(i) for i in combs])
 
-# print(combs)
-# print(sums)
-
 difference_array = np.absolute(sums-target)
 index = difference_array.argmin()
 print(combs[index])

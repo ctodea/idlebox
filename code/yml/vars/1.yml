@@ -1,0 +1,4 @@
+---
+name: "DSV"  # mandatory
+state: present  # optional, choices: present, absent
+# galaxy_credentials: "dsv_galaxy_api_key"

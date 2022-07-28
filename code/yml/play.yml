@@ -1,0 +1,15 @@
+- hosts: all
+  connection: local
+  tasks:
+    - name: Load var files
+      include_vars:
+        file: "{{ item }}"
+        name: "incl_vars_{{ item|basename|splitext|first }}"
+      with_fileglob:
+        - vars/*.yml
+
+    - set_fact:
+        controller_organization: "{{ controller_organization | default([]) + [lookup('vars', item)] }}"
+      loop: "{{ query('varnames', '^incl_vars_(.*)$') }}"
+
+    - debug: var=controller_organization
