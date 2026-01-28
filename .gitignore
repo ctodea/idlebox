@@ -211,5 +211,5 @@ crash.log
 #
 # example.tfvars
 
-
+**/lazy-lock.json
 # End of https://www.gitignore.io/api/terraform
