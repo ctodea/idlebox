@@ -60,3 +60,12 @@ vim.api.nvim_set_hl(0, 'LspInlayHint', {
 vim.keymap.set('n', '<leader>h', function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = 'Toggle inlay hints' })
+
+-- Lualine setup
+require('lualine').setup({
+  options = {
+    theme = 'onedark',
+    section_separators = '',
+    component_separators = '|'
+  }
+})
